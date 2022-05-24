@@ -7,7 +7,9 @@ const emmitter = new events.EventEmitter()
 const app = express()
 
 app.use(cors({
-    origin: '*'
+    origin:'http://localhost:3000', 
+    credentials:true,            
+    optionSuccessStatus:200
 }))
 app.use(express.json())
 app.get('/get-messages',cors(), (req,res) => {
