@@ -8,12 +8,16 @@ const app = express()
 
 app.use(cors())
 app.use(express.json())
-app.get('/get-messages',cors(), (req,res) => {
+app.get('/get-messages',cors({
+    origin: 'https://client-real-time-chat.vercel.app'
+}), (req,res) => {
     emmitter.once('newMessage', (message) => {
         res.json(message)
     })
 })
-app.post('/new-messages',cors(), (req,res) => {
+app.post('/new-messages',cors({
+    origin: 'https://client-real-time-chat.vercel.app'
+}), (req,res) => {
     const message = req.body;
     emmitter.emit('newMessage',message)
     res.status(200)
