@@ -12,12 +12,12 @@ app.use(cors({
     optionSuccessStatus:200
 }))
 app.use(express.json())
-app.get('/get-messages',cors(), (req,res) => {
+app.get('/get-messages', (req,res) => {
     emmitter.once('newMessage', (message) => {
         res.json(message)
     })
 })
-app.post('/new-messages',cors(), (req,res) => {
+app.post('/new-messages', (req,res) => {
     const message = req.body;
     emmitter.emit('newMessage',message)
     res.status(200)
